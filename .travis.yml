@@ -26,11 +26,13 @@ before_install:
 jobs:
   include:
   - stage: test
-    install: skip
+    install:
+      - echo test
     script:
       - poetry install
   - stage: deploy
-    install: skip
+    install:
+      - echo deploy
     script:
       - poetry build
       - poetry publish
