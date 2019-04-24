@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "django-health-check-email"
+version = "0.1.0"
+description = "Add email check to django-health-check."
+authors = ["Nicolas KAROLAK <nicolas.karolak@ubicast.eu>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://www.ubicast.eu"
+repository = "https://github.com/UbiCastTeam/djang-health-check-email"
+keywords = ["django", "monitoring", "health", "email"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 2.2",
+]
+packages = [
+    { include = "health_check_email", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+django-health-check = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.3"
+flake8 = "^3.7"
+django = "^2.2"
+black = {version = "*",allows-prereleases = true}
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

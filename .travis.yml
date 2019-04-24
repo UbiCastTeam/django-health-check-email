@@ -1,0 +1,31 @@
+---
+
+language: python
+sudo: false
+cache: pip
+python:
+  - '3.6'
+env:
+  matrix:
+    - DJANGO=111
+    - DJANGO=20
+    - DJANGO=master
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: DJANGO=master
+jobs:
+  include:
+    - stage: PyPI release
+      script: skip
+      if: tag IS present
+      deploy:
+        provider: pypi
+        distributions: sdist bdist_wheel
+        user: ubicast
+        on:
+          tags: true
+          repo: UbiCastTeam/django-health-check-email
+          branch: master
+
+...
