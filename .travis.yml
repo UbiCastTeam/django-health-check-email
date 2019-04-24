@@ -22,11 +22,15 @@ before_install:
   - pip install --upgrade pip
   - pip install poetry
   - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
-  - poetry build
 
 jobs:
   include:
   - stage: test
-    script: skip
+    install: skip
+    script:
+      - poetry install
   - stage: deploy
-    script: poetry publish
+    install: skip
+    script:
+      - poetry build
+      - poetry publish
