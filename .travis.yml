@@ -1,31 +1,32 @@
----
-
 language: python
-sudo: false
+python: "3.6"
 cache: pip
-python:
-  - '3.6'
+
+stages:
+  - name: test
+  - name: deploy
+    if: tag IS present
+
 env:
   matrix:
-    - DJANGO=111
-    - DJANGO=20
-    - DJANGO=master
+  - DJANGO=111
+  - DJANGO=20
+  - DJANGO=master
+
 matrix:
   fast_finish: true
   allow_failures:
-    - env: DJANGO=master
+  - env: DJANGO=master
+
+before_install:
+  - pip install --upgrade pip
+  - pip install poetry
+  - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+  - poetry build
+
 jobs:
   include:
-    - stage: PyPI release
-      script: skip
-      if: tag IS present
-      deploy:
-        provider: pypi
-        distributions: sdist bdist_wheel
-        user: ubicast
-        on:
-          tags: true
-          repo: UbiCastTeam/django-health-check-email
-          branch: master
-
-...
+  - stage: test
+    script: skip
+  - stage: deploy
+    script: poetry publish
