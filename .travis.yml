@@ -7,24 +7,20 @@ stages:
   - name: deploy
     if: tag IS present
 
-env:
-  matrix:
-  - DJANGO=22
-
 jobs:
   include:
-  - stage: test
-    install:
-      - pip install --upgrade pip
-      - pip install poetry
-      - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
-    script:
-      - poetry install
-  - stage: deploy
-    install:
-      - pip install --upgrade pip
-      - pip install poetry
-      - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
-    script:
-      - poetry build
-      - poetry publish
+    - stage: test
+      install:
+        - pip install --upgrade pip
+        - pip install poetry
+        - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+      script:
+        - poetry install
+    - stage: deploy
+      install:
+        - pip install --upgrade pip
+        - pip install poetry
+        - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+      script:
+        - poetry build
+        - poetry publish
