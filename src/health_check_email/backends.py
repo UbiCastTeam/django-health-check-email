@@ -1,3 +1,5 @@
+from smtplib import SMTPException
+
 from django.core.mail import send_mail
 from health_check.backends import BaseHealthCheckBackend
 from health_check.exceptions import HealthCheckException
@@ -17,8 +19,8 @@ class EmailBackend(BaseHealthCheckBackend):
     def check_status(self):
         try:
             send_mail(EMAIL_SUBJECT, EMAIL_MESSAGE, EMAIL_FROM, EMAIL_TO)
-        except expression as identifier:
-            raise HealthCheckException
+        except SMTPException as message:
+            raise HealthCheckException(message)
 
     def identifier(self):
         return self.__class__.__name__

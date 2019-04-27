@@ -14,7 +14,6 @@ class HealthCheckEmailConfig(AppConfig):
         ):
             pass
         else:
-            from .conf import HEALTH_CHECK
             from .backends import EmailBackend
 
             plugin_dir.register(EmailBackend)
