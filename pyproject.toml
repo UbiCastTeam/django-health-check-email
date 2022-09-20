@@ -6,7 +6,7 @@ authors = ["Nicolas KAROLAK <nicolas.karolak@ubicast.eu>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://www.ubicast.eu"
-repository = "https://github.com/UbiCastTeam/djang-health-check-email"
+repository = "https://github.com/UbiCastTeam/django-health-check-email"
 keywords = ["django", "monitoring", "health", "email"]
 classifiers = [
     "Environment :: Web Environment",
